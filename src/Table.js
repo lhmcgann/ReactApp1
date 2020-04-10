@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 
-class Table extends Component {
-  render() {
-     const {characterData} = this.props
-    return (
-      <table>
-        <TableHeader />
-        <TableBody cd={characterData} />
-      </table>
-    )
-  }
+const Table = props => {
+  const { characterData, removeCharacter } = props
+
+  return (
+    <table>
+      <TableHeader />
+      <TableBody cd={characterData} rc={removeCharacter} />
+    </table>
+  )
 }
 
 const TableHeader = () => {
@@ -29,6 +28,9 @@ const TableBody = p => {
       <tr key={index}>
         <td>{row.name}</td>
         <td>{row.job}</td>
+        <td>
+            <button onClick={() => p.rc(index)}>Delete</button>
+        </td>
       </tr>
     )
   })
