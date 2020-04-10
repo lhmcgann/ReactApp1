@@ -1,3 +1,5 @@
+There was already a README.md file so I just changed it in the web interface rather than creating it.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
