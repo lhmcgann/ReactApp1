@@ -10,7 +10,7 @@ class App extends Component {
 
   render() {
      const {characters} = this.state
-    return (
+     return (
       <div className="container">
         <Table characterData={characters} removeCharacter={this.removeCharacter}/>
         <Form handleSubmit={this.handleSubmit}/>
@@ -23,12 +23,35 @@ class App extends Component {
    axios.get('http://localhost:5000/users')
     .then(res => { // every API call has a response object, 'res' here
       const characters = res.data.users_list;
-      this.setState({ characters });
+      this.setState({characters});
     })
     .catch(function (error) {
       //Not handling the error. Just logging into the console.
       console.log(error);
     });
+  }
+
+  makePostCall(person) {
+   return axios.post('http://localhost:5000/users', person)
+    .then(function (res) {
+      console.log(res);
+      return (res.status === 200);
+    })
+    .catch(function (err) {
+      console.log(err);
+      return false;
+    });
+  }
+
+  /* If new person (json object) successfully added (POSTed) to backend database,
+   * then add person to frontend Table that's displayed too
+   */
+  handleSubmit = person => {
+   this.makePostCall(person).then( callResult => {
+      if (callResult === true) {
+         this.setState({ characters: [...this.state.characters, person] });
+      }
+   });
   }
 
   removeCharacter = index => {
@@ -39,10 +62,6 @@ class App extends Component {
         return i !== index
       }),
     })
-  }
-
-  handleSubmit = character => {
-     this.setState({ characters: [...this.state.characters, character] })
   }
 }
 
