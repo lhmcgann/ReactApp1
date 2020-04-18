@@ -17,6 +17,7 @@ const TableHeader = () => {
       <tr>
         <th>Name</th>
         <th>Job</th>
+        <th>ID</th>
       </tr>
     </thead>
   )
@@ -32,6 +33,7 @@ const TableBody = p => {
       <tr key={row.id}>
         <td>{row.name}</td>
         <td>{row.job}</td>
+        <td>{row.id}</td>
         <td>
             <button onClick={() => p.rc(row.id)}>Delete</button>
         </td>
