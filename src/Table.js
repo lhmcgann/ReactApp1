@@ -25,10 +25,6 @@ const TableHeader = () => {
 
 const TableBody = p => {
   const rows = p.cd.map((row) => {
-     // TODO: remove console logs once tested! issue: can't remove POSTed chars
-     //  bc App doesn't get POSTed data from backend --> no id for new ppl
-     console.log(row);
-     console.log(row.id);
     return (
       <tr key={row.id}>
         <td>{row.name}</td>
