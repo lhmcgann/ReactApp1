@@ -43,6 +43,18 @@ class App extends Component {
     });
   }
 
+  makeDeleteCall(id) {
+   return axios.delete('http://localhost:5000/users/'+id)
+    .then(function (res) {
+      console.log(res);
+      return (res.status === 201);
+    })
+    .catch(function (err) {
+      console.log(err);
+      return false;
+    });
+  }
+
   /* If new person (json object) successfully added (POSTed) to backend database,
    * then add person to frontend Table that's displayed too
    */
@@ -54,15 +66,21 @@ class App extends Component {
    });
   }
 
-  removeCharacter = index => {
-    const { characters } = this.state
+  removeCharacter = id => {
+    this.makeDeleteCall(id).then( callResult => {
+      // if backend call successful, update frontend
+      if (callResult === true) {
+         const { characters } = this.state
 
-    this.setState({
-      characters: characters.filter((character, i) => {
-        return i !== index
-      }),
-    })
+         this.setState({
+           characters: characters.filter((character) => {
+             return character.id !== id
+           }),
+         })
+      }
+    });
   }
+
 }
 
 
