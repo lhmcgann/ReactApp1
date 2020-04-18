@@ -35,12 +35,27 @@ class App extends Component {
    return axios.post('http://localhost:5000/users', person)
     .then(function (res) {
       console.log(res);
-      return (res.status === 201);
+      if (res.status === 201) {
+         return res.data;
+      }
+      return null;
     })
     .catch(function (err) {
       console.log(err);
-      return false;
+      return null;
     });
+  }
+
+  /* If new person (json object) successfully added (POSTed) to backend database,
+   * then add person to frontend Table that's displayed too
+   */
+  handleSubmit = person => {
+   this.makePostCall(person).then( callData => {
+      console.log("App.js:54 resp.data = " + callData);
+      if (callData !== null) {
+         this.setState({ characters: [...this.state.characters, callData] });
+      }
+   });
   }
 
   makeDeleteCall(id) {
@@ -53,17 +68,6 @@ class App extends Component {
       console.log(err);
       return false;
     });
-  }
-
-  /* If new person (json object) successfully added (POSTed) to backend database,
-   * then add person to frontend Table that's displayed too
-   */
-  handleSubmit = person => {
-   this.makePostCall(person).then( callResult => {
-      if (callResult === true) {
-         this.setState({ characters: [...this.state.characters, person] });
-      }
-   });
   }
 
   removeCharacter = id => {
