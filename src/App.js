@@ -35,7 +35,7 @@ class App extends Component {
    return axios.post('http://localhost:5000/users', person)
     .then(function (res) {
       console.log(res);
-      return (res.status === 200);
+      return (res.status === 201);
     })
     .catch(function (err) {
       console.log(err);
