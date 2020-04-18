@@ -51,7 +51,6 @@ class App extends Component {
    */
   handleSubmit = person => {
    this.makePostCall(person).then( callData => {
-      console.log("App.js:54 resp.data = " + callData);
       if (callData !== null) {
          this.setState({ characters: [...this.state.characters, callData] });
       }
