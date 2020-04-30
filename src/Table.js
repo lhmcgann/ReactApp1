@@ -26,12 +26,12 @@ const TableHeader = () => {
 const TableBody = p => {
   const rows = p.cd.map((row) => {
     return (
-      <tr key={row.id}>
+      <tr key={row._id}>
         <td>{row.name}</td>
         <td>{row.job}</td>
-        <td>{row.id}</td>
+        <td>{row._id}</td>
         <td>
-            <button onClick={() => p.rc(row.id)}>Delete</button>
+            <button onClick={() => p.rc(row._id)}>Delete</button>
         </td>
       </tr>
     )
