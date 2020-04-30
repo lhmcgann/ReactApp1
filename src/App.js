@@ -61,7 +61,7 @@ class App extends Component {
    return axios.delete('http://localhost:5000/users/'+id)
     .then(function (res) {
       console.log(res);
-      return (res.status === 201);
+      return (res.status === 204);
     })
     .catch(function (err) {
       console.log(err);
@@ -77,7 +77,7 @@ class App extends Component {
 
          this.setState({
            characters: characters.filter((character) => {
-             return character.id !== id
+             return character._id !== id
            }),
          })
       }
